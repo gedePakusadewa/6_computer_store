@@ -1,0 +1,215 @@
+.btn-cust{
+    border: none;
+    color: white;
+    padding: 2px 5px 2px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 4px 0px;
+    cursor: pointer;
+    width: 100%;
+    /* background-color: #2e3347; */
+}
+
+.btn-signup{
+    border-radius: 8px;
+    background-color: 	#d07619;
+}
+
+.btn-login{
+    border-radius: 8px;
+    background-color: #8b1b07;
+}
+
+input{
+    border-radius: 5px;
+    width: 100%;
+    padding: 3px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #f1f1f1;
+}
+
+/* log In */
+.login-container{
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
+
+.login-container > div {
+  width: 300px;
+  margin-top: 107px;
+  background-color: #e2a74e;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.login-container > div > h2 {
+    text-align: center;
+    color: white;
+}
+
+.login-container > div > label {
+    color: white;
+}
+
+/* .login-container-bg{
+    background-image: url("../public/pizza_1.jpg");
+    width: 100%;
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+
+.wrong-username-password {
+    color: red;
+}
+
+.login-container > div > button {
+    margin-top:10px;
+}
+
+@media only screen and (min-width: 768px) {
+    /* for desktop */
+    .login-container > div {
+        margin-left: 100px;
+    }
+
+    .login-container{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: auto;
+    }
+
+    .login-container-bg{
+        height: 700px;
+    }
+}
+
+/* end log In */
+
+/* nav bar */
+
+.container-navbar{
+    display: flex;
+    justify-content: center;
+    /* border:1px solid green; */
+}
+
+.container-navbar > div > a {
+    width: 80%;
+    border-radius: 20px;
+    height:100%;
+    background-color: #2e3347;
+}
+
+.btn-navbar{
+    background-color: #0d6efd;
+}
+
+.btn-navbar-logout{
+    background-color: #ffc107;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-navbar > nav > div > a > button {
+    border-right: 3px solid #949d8b;
+}
+
+.btn-active-navbar{
+    background-color: #949d8b;
+    color: white;
+}
+.btn-non-active-navbar{
+    background-color: #e9ebe8;
+    color: black;
+}
+
+@media only screen and (min-width: 768px) {
+    .container-navbar{
+        display: flex;
+        justify-content: flex-end;
+        /* border:1px solid green; */
+        /* float:right; */
+    }
+}
+
+/* end nav bar */
+
+/* home/dashboard */
+.container-home{
+    background-color: #e9ebe8;
+}
+.title-home {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.container-search-input{
+    text-align: center;
+}
+
+.search-input-home{
+    font-size: 15px;
+    width: 90%;
+}
+
+/* .container-header-home{
+    background-image: url("../public/food_2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border:1px solid red;
+    height:145px
+} */
+
+.result-search-wrapper{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding-left: 50px;
+    margin-top: 10px;
+}
+
+.btn-search-home{
+    border: none;
+    color: white;
+    padding: 2px 5px 2px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #954a36;
+    height: 30px;
+    width: 60px 
+}
+
+@media only screen and (min-width: 768px) {
+    .search-input-home{
+        width: 400px;
+    }
+
+    .container-header-home{
+        height:205px
+    }
+
+    .result-search-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: inherit;
+    }
+}
+
+/* end home/dashboard */
+
