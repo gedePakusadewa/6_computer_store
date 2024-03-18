@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import UserSerializer
+from .serializers import UserSerializer, ProductSerializer
 from rest_framework import status, generics
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -14,6 +14,9 @@ from django.conf import settings
 
 import requests
 from django.http import JsonResponse
+
+# from rest_framework.parsers import MultiPartParser, FormParser
+from .models import ProductModel
 
 class LogIn(generics.GenericAPIView):
     serializer_class = UserSerializer
@@ -66,3 +69,27 @@ class LogOut(generics.GenericAPIView):
             {"Success":"Success Log Out"},
             status=status.HTTP_200_OK
         )
+
+class UploadImage(generics.GenericAPIView):
+    queryset = ProductModel.objects.all()
+    serializer_class = ProductSerializer
+    # parser_classes = (MultiPartParser, FormParser)
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    #http://localhost:8000/media/images/Screenshot_2023-11-23_073706.png
+    
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response({"image_url":serializer.data})
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def get(self, request):
+        serializer = self.serializer_class(self.queryset.all(), many=True)
+
+        return Response(serializer.data)
