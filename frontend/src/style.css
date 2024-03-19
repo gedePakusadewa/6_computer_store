@@ -213,3 +213,11 @@ nav {
 
 /* end home/dashboard */
 
+
+/* product card */
+
+.product-cards-container{
+    display: flex;
+}
+
+/* end product card */

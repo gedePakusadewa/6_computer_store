@@ -12,6 +12,7 @@ class ProductModel(models.Model):
     created_by = models.CharField(max_length=200)
     created_date = models.DateField()
     modified_date = models.DateField()
+    star_review = models.IntegerField(default=0)
 
     class Meta:
         def __str__(self) -> str:
