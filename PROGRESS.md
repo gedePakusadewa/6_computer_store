@@ -1,9 +1,17 @@
+###
+PR
+- cek gimana caranya ngebuat page route dengan data di url,query paremeter, ini untuk 
+  keperluan ketika user klik card produk maka langsung dialihkan ke product detail yang isinya data berdasarkan data dari url
+
 ##### Day 3
 - FE
-  - display all product with button detail, price, name, review
-  - add page to display product detail
-- ~BE~
-  - Add new APi to get product detail base on product id
+  - ~display all product with button detail, price, name, review~
+  - add page to display product detail {PENDING}
+  - Add simple page profile using API
+  
+- BE
+  - ~Add new APi to get product detail base on product id~
+  - ~Add API to get user username and email~
 
 ##### Day 2
 - BE

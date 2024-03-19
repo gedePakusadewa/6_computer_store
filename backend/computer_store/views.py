@@ -93,7 +93,6 @@ class ProductImage(generics.GenericAPIView):
         serializer = self.serializer_class(self.queryset.all(), many=True)
 
         return Response(serializer.data)
-    
 
 class ProductDetail(generics.GenericAPIView):
     queryset = ProductModel.objects.all()
@@ -107,4 +106,26 @@ class ProductDetail(generics.GenericAPIView):
         serializer = self.serializer_class(instance=product)
 
         return Response({"product_detail":serializer.data}) 
+
+class Profile(generics.GenericAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user_id = Token.objects.get(key=request.auth.key).user_id
+        user = User.objects.get(pk=user_id)
+
+        if not user:
+            return Response(
+                {
+                    "message":"User not found"
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        serializer = self.serializer_class(instance=user)
+
+        return Response({"user":serializer.data})
 
