@@ -1,6 +1,7 @@
 from django.db import models
 
 # lets us explicitly set upload path and filename
+# cari tau gimana cara kerja upload to ini pakek library pillow
 def upload_to(instance, filename):
     return 'images/{filename}'.format(filename=filename)
 

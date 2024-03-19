@@ -1,3 +1,10 @@
+##### Day 3
+- FE
+  - display all product with button detail, price, name, review
+  - add page to display product detail
+- ~BE~
+  - Add new APi to get product detail base on product id
+
 ##### Day 2
 - BE
   - add product to DB

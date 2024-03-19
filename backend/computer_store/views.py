@@ -70,7 +70,7 @@ class LogOut(generics.GenericAPIView):
             status=status.HTTP_200_OK
         )
 
-class UploadImage(generics.GenericAPIView):
+class ProductImage(generics.GenericAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductSerializer
     # parser_classes = (MultiPartParser, FormParser)
@@ -93,3 +93,18 @@ class UploadImage(generics.GenericAPIView):
         serializer = self.serializer_class(self.queryset.all(), many=True)
 
         return Response(serializer.data)
+    
+
+class ProductDetail(generics.GenericAPIView):
+    queryset = ProductModel.objects.all()
+    serializer_class = ProductSerializer
+    # parser_classes = (MultiPartParser, FormParser)
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        product = get_object_or_404(ProductModel, pk=request.data["pk"])
+        serializer = self.serializer_class(instance=product)
+
+        return Response({"product_detail":serializer.data}) 
+
