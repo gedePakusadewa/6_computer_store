@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # lets us explicitly set upload path and filename
 # cari tau gimana cara kerja upload to ini pakek library pillow
@@ -17,3 +18,14 @@ class ProductModel(models.Model):
     class Meta:
         def __str__(self) -> str:
             return self.name
+        
+class CartModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
+    created_date = models.DateField()
+    total_order = models.IntegerField()
+
+    class Meta:
+        def __str__(self) -> str:
+            return self.created_date
+

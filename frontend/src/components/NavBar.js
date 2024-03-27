@@ -14,10 +14,19 @@ function Navbar({activeNavBar}) {
       <nav>
         <div>
           <Link to="/">
-            <button 
+            <button  
               className={activeNavBar === GeneralConst.DASHBOARD ? "btn-cust btn-active-navbar" : "btn-cust btn-non-active-navbar"}
             >
               {GeneralConst.DASHBOARD}
+            </button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/cart">
+            <button 
+              className={activeNavBar === GeneralConst.CART ? "btn-cust btn-active-navbar" : "btn-cust btn-non-active-navbar"}
+            >
+              {GeneralConst.CART}
             </button>
           </Link>
         </div>

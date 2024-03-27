@@ -1,5 +1,5 @@
 import UrlConst from "../resources/Urls.js"
-
+import { Link } from "react-router-dom";
 
 
 const ProductCards = ({products}) => {
@@ -37,14 +37,17 @@ const ProductCards = ({products}) => {
     <>
       <div className="product-cards-container">
         {products.map(item => (
-          <div>
-            <img
-              src={UrlConst.PRODUCT_IMAGE_URI + item.image_url}
-            />
-            <div>{item.name}</div>
-            <div>{item.star_review}</div>
-            <div>{item.price}</div>
-          </div>
+          <Link to={`/product/${item.id}`}>
+            <div>
+              <img
+                src={UrlConst.PRODUCT_IMAGE_URI + item.image_url}
+              />
+              <div>{item.name}</div>
+              <div>{item.star_review}</div>
+              <div>{item.price}</div>
+              
+            </div>
+          </Link>
         ))}
       </div>
     </>

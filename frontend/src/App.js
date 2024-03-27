@@ -4,6 +4,8 @@ import Dashboard from './pages/Dashboard.js';
 import Profile from './pages/Profile.js';
 import LogIn from './pages/LogIn.js';
 import SignUp from './pages/SignUp.js';
+import Product from './pages/Product.js';
+import Cart from './pages/Cart.js';
 import AuthProvider from './helper/Authentication.js';
 import ProtectedRoute from './helper/ProtectedRoute.js';
 import GeneralConst from "./resources/General.js"
@@ -41,6 +43,22 @@ function App() {
                  activeNavBar={GeneralConst.PROFILE}
                 />
                 <Profile />
+              </ProtectedRoute> 
+            }/>
+            <Route path="/product/:id" element={
+              <ProtectedRoute>
+                <Navbar 
+                 activeNavBar={GeneralConst.DASHBOARD}
+                />
+                <Product />
+              </ProtectedRoute> 
+            }/>
+            <Route path="/cart" element={
+              <ProtectedRoute>
+                <Navbar 
+                 activeNavBar={GeneralConst.CART}
+                />
+                <Cart />
               </ProtectedRoute> 
             }/>
             <Route path="/login" element={<LogIn />} />

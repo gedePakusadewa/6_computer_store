@@ -10,6 +10,7 @@ const General = {
     SUBMIT:"Submit",
     DASHBOARD:"Dashboard",
     PROFILE:"Profile",
+    CART:"Cart"
   };
   
   export default General

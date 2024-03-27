@@ -1,11 +1,18 @@
-###
-PR
-- cek gimana caranya ngebuat page route dengan data di url,query paremeter, ini untuk 
-  keperluan ketika user klik card produk maka langsung dialihkan ke product detail yang isinya data berdasarkan data dari url
+##### DAy 5
+- BE
+  - ~Add API "add to cart"~
 
-##### Day XX
 - FE
-  - fix CSS display in login/signup, use color scheme that suited with the project
+
+
+##### Day 4
+- FE
+  - ~implement query paramter react~
+  - ~display proudt detail~
+  - ~Add cart page~
+
+- BE
+  - Add API "add to cart"
 
 ##### Day 3
 - FE

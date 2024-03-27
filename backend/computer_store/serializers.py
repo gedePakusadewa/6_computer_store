@@ -6,10 +6,15 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'password', 'email']
 
-from .models import ProductModel
+from .models import ProductModel, CartModel
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductModel
         fields = ['id', 'name', 'image_url', 'price', 'created_by', 'created_date', 'modified_date', 'star_review']
+
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartModel
+        fields = "__all__"
 

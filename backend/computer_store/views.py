@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import UserSerializer, ProductSerializer
+from .serializers import UserSerializer, ProductSerializer, CartSerializer
 from rest_framework import status, generics
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -16,7 +16,7 @@ import requests
 from django.http import JsonResponse
 
 # from rest_framework.parsers import MultiPartParser, FormParser
-from .models import ProductModel
+from .models import ProductModel, CartModel
 
 class LogIn(generics.GenericAPIView):
     serializer_class = UserSerializer
@@ -102,7 +102,8 @@ class ProductDetail(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        product = get_object_or_404(ProductModel, pk=request.data["pk"])
+        
+        product = get_object_or_404(ProductModel, pk=request.GET.get('pk'))
         serializer = self.serializer_class(instance=product)
 
         return Response({"product_detail":serializer.data}) 
@@ -129,3 +130,52 @@ class Profile(generics.GenericAPIView):
 
         return Response({"user":serializer.data})
 
+class Cart(generics.GenericAPIView):
+    queryset = CartModel.objects.all()
+    serializer_class = CartSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user_id = Token.objects.get(key=request.auth.key).user_id
+        user = User.objects.get(pk=user_id)
+
+        if user:
+            product = ProductModel.objects.get(pk=request.data['pk'])\
+            
+            if product:
+
+                product_data = {
+                    "user" : user_id,
+                    "product" : request.data['pk'],
+                    "created_date" : "2024-03-18",
+                    "total_order" : request.data['total_order']
+                }
+
+                serializer = self.serializer_class(data=product_data)
+
+                if  serializer.is_valid():
+                    serializer.save()
+
+                    return Response(status=status.HTTP_200_OK)
+                
+                return Response(
+                        {
+                            "message":"Can not save product"
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+                
+            return Response(
+                    {
+                        "message":"Product not found"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+        return Response(
+                {
+                    "message":"User not found"
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )

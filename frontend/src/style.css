@@ -221,3 +221,10 @@ nav {
 }
 
 /* end product card */
+
+
+/* detail product */
+.product-container{
+    display: flex;
+}
+/* end detail product */
