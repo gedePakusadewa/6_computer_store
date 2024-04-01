@@ -5,7 +5,8 @@ const Url = {
     PRODUCT_IMAGE_URI:"http://localhost:8000",
     ALL_PRODUCT:"http://localhost:8000/api/v1/computer-store/productimage",
     PROFILE:"http://localhost:8000/api/v1/computer-store/profile",
-    PRODUCT_DETAIL:"http://localhost:8000/api/v1/computer-store/productdetail"
+    PRODUCT_DETAIL:"http://localhost:8000/api/v1/computer-store/productdetail",
+    ADD_TO_CART:"http://localhost:8000/api/v1/computer-store/cart"
   };
   
 export default Url

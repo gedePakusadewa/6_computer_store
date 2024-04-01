@@ -22,7 +22,23 @@ const Product = () => {
     }).catch((err) => {
       console.log("error in product detail")
     })
-  })
+  }, [])
+
+  const AddToCartHandler = () => {
+    axios({
+      method: 'post',
+      url: UrlConst.ADD_TO_CART,
+      headers: {'Authorization': "Token " + cookies['token']},
+      data: { 
+        product_pk : product.id,
+        total_order : 1 
+      }
+    }).then((res) => {
+      // console.log("success")
+    }).catch((err) => {
+      console.log("error in add to cart")
+    })
+  }
 
   return (
     <>
@@ -43,7 +59,9 @@ const Product = () => {
             <div>Rp. {product.price}</div>
             <div>Status In Stock</div>
             <div>
-              <button>
+              <button
+                onClick={AddToCartHandler}
+              >
                 Add To Cart
               </button>
             </div>
