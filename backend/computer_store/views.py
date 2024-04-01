@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import UserSerializer, ProductSerializer, CartSerializer
+from .serializers import UserSerializer, ProductSerializer, CartSerializer,CartDetailSerializer
 from rest_framework import status, generics
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -17,6 +17,8 @@ from django.http import JsonResponse
 
 # from rest_framework.parsers import MultiPartParser, FormParser
 from .models import ProductModel, CartModel
+
+from django.db import connection
 
 class LogIn(generics.GenericAPIView):
     serializer_class = UserSerializer
@@ -141,13 +143,13 @@ class Cart(generics.GenericAPIView):
         user = User.objects.get(pk=user_id)
 
         if user:
-            product = ProductModel.objects.get(pk=request.data['pk'])\
+            product = ProductModel.objects.get(pk=request.data['product_pk'])
             
             if product:
 
                 product_data = {
                     "user" : user_id,
-                    "product" : request.data['pk'],
+                    "product" : request.data['product_pk'],
                     "created_date" : "2024-03-18",
                     "total_order" : request.data['total_order']
                 }
@@ -179,3 +181,48 @@ class Cart(generics.GenericAPIView):
                 },
                 status=status.HTTP_400_BAD_REQUEST
             )
+    
+    def get(self, request):
+        user_id = Token.objects.get(key=request.auth.key).user_id
+        user = User.objects.get(pk=user_id)
+        
+        if user:
+            db_helper = DB_helper()
+            carts = self.convert_list_to_dict(db_helper.function_get_all("cart_get_all_by_user_id("+str(user_id)+")"))
+
+            serializer = CartDetailSerializer(instance=carts, many=True)
+            
+            return Response({"cart_products":serializer.data}) 
+
+        return Response(
+                {"message":"User not found"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+    
+    def convert_list_to_dict(self, list_data):
+        temp_dict = {}
+        temp_list = []
+        for item in list_data:
+            temp_dict["name"] = item[0]
+            temp_dict["image_url"] = item[1]
+            temp_dict["price"] = item[2]
+            temp_dict["total_order"] = item[3]
+            temp_list.append(temp_dict)
+
+        return temp_list
+
+#TODO:
+    #find a new structure to place db helper
+    #search what is connection, connection.cursor, cursor.execute, cursor.fetahcall()
+    #is there alternative to this?
+class DB_helper():
+    def function_get_all(self, function_name):
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM "+ function_name +";")
+            row = cursor.fetchall()
+
+        return row
+    
+
+
+

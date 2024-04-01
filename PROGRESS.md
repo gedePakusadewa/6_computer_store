@@ -1,9 +1,23 @@
+#### day 6
+- BE
+  - ~create new API to get cart product~
+  - ~create new serialiser for this API~
+
+- FE
+  - display all cart from API get cart
+
 ##### DAy 5
 - BE
   - ~Add API "add to cart"~
+  - Add API get cart product
+    - Using SP instead of django ORM
+      - ref https://www.youtube.com/watch?v=Kvf8Bj343Ds
+        - kayaknya konsep SP itu sama kayak di C#/ASP.NET, bisa bikin di DB terus panggil nama SP ini di server, i choose using function instead of SP
+        - try to call function from DB through django backend    
 
 - FE
-
+  - ~add function "add to cart" using existing API~
+  - display product in cart page
 
 ##### Day 4
 - FE

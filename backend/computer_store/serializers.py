@@ -18,3 +18,9 @@ class CartSerializer(serializers.ModelSerializer):
         model = CartModel
         fields = "__all__"
 
+class CartDetailSerializer(serializers.Serializer):
+    name = serializers.StringRelatedField()
+    image_url = serializers.StringRelatedField()
+    price = serializers.IntegerField()
+    total_order = serializers.IntegerField()
+
